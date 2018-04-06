@@ -34,7 +34,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("APP STATE", state.users);
+  console.log("APP STATE", state);
   return {
     loggedIn: state.users.loggedIn,
     loading: state.users.loading,

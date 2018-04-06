@@ -17,7 +17,6 @@ export default function users(state = defaultState, action) {
         loggedIn: true
       };
     case LOGOUT_USER:
-      console.log("logout");
       return {
         ...state,
         current_user: null,

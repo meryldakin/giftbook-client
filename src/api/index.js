@@ -12,7 +12,7 @@ const post = (endpoint, params) => {
   }).then(res => res.json());
 };
 
-const get = () => (endpoint, params) => {
+const get = (endpoint) => {
   return fetch(`${baseURL}/${endpoint}`).then(res => res.json());
 };
 
@@ -23,3 +23,5 @@ export const loginUser = user_params => {
 export const fetchCurrentUser = () => {
   return post("fetch_current_user", { token: localStorage.getItem("token") });
 };
+
+export const fetchFriends = () => get("friends")
