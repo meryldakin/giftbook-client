@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../actions/index";
 import { withRouter } from "react-router";
 import { Redirect } from "react-router-dom";
-import Container from "./Container";
+
 
 class Login extends React.Component {
   constructor() {
@@ -32,7 +32,7 @@ class Login extends React.Component {
   render() {
     if (!!localStorage.getItem("token") && !!this.props.loggedIn) {
       console.log("login", this.props);
-      return <Redirect to="/" />;
+      this.props.history
     }
     return (
       <div>

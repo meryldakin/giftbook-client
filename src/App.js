@@ -28,19 +28,18 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Route
-          exact
-          path="/"
-          render={() => <AuthedContainer loggedIn={this.props.loggedIn} />}
-        />
         <Route exact path="/login" component={Login} />
+        <Route
+          path="/"
+          render={(props) => <AuthedContainer loggedIn={this.props.loggedIn} {...props} />}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log("APP STATE", state.users);
+  console.log("APP STATE", state);
   return {
     loggedIn: state.users.loggedIn,
     loading: state.users.loading,
