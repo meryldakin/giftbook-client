@@ -2,16 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 // Add REDUX
 import { connect } from "react-redux";
-//import auth hoc
-import withAuth from "./hocs/withAuth";
 //import files
 import Login from "./components/Login";
 import Container from "./components/Container";
 import Loading from "./components/Loading";
 //import actions
 import * as actions from "./actions/index";
-
-const AuthedContainer = withAuth(Container);
 
 class App extends Component {
   componentWillMount() {

@@ -1,5 +1,5 @@
 import * as apiHelpers from "../api";
-import { SET_USER, START_SET_USER, LOGOUT_USER, FETCH_FRIENDS, SET_SELECTED_FRIEND } from "./types";
+import { SET_USER, START_SET_USER, LOGOUT_USER, FETCH_FRIENDS, SET_SELECTED_FRIEND, SAVE_GIFT } from "./types";
 
 export function loginUser(user_params) {
   return function(dispatch) {
@@ -60,6 +60,19 @@ export function setSelectedFriend(friendId){
       .then(data => {
         dispatch({
           type: SET_SELECTED_FRIEND,
+          payload: data
+        })
+      })
+  }
+}
+
+export function saveGift(gift){
+  return function(dispatch){
+    apiHelpers
+      .saveGift(gift)
+      .then(data => {
+        dispatch({
+          type: SAVE_GIFT,
           payload: data
         })
       })

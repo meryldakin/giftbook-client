@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Logout from "./Logout";
 import { fetchFriends } from "../actions"
 import Friends from "./Friends"
+import FriendGifts from "./FriendGifts"
 
 
 class Container extends Component {
@@ -19,6 +20,9 @@ class Container extends Component {
         <h1>Main Container: U r home</h1>
         <Logout />
         <Friends/>
+        {this.props.selectedFriend.id ?
+          <FriendGifts/> :
+        null }
       </div>
     );
   }
@@ -26,7 +30,8 @@ class Container extends Component {
 
 const mapStateToProps = state => {
   return {
-    current_user: state.users.current_user
+    current_user: state.users.current_user,
+    selectedFriend: state.friends.selectedFriend
   };
 };
 
