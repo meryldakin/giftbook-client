@@ -1,5 +1,6 @@
 import React from "react"
 import GiftForm from './GiftForm'
+import { Button } from 'react-bootstrap'
 
 class GiftShow extends React.Component {
 
@@ -21,8 +22,8 @@ class GiftShow extends React.Component {
             <td>{this.props.gift.bought ? "Bought" : null}</td>
             <td>{this.props.gift.occasion ? this.props.gift.occasion.name : null}</td>
             <td>{this.props.gift.year ? this.props.gift.year : null}</td>
-            <td><button onClick={this.toggleEdit}>Edit</button></td>
-            <td><button>Delete</button></td>
+            <td><Button onClick={this.toggleEdit}><i className="fas fa-edit"></i></Button></td>
+
           </tr>
         )
       } else {

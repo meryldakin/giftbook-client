@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Logout from "./Logout";
 import { fetchFriends } from "../actions"
 import Friends from "./Friends"
 import FriendGifts from "./FriendGifts"
-
+import OccasionShow from "./OccasionShow"
+import Navigation from "./Navigation"
+import { Grid, Row, Col, Well } from 'react-bootstrap'
 
 class Container extends Component {
 
@@ -17,12 +18,29 @@ class Container extends Component {
   render() {
     return (
       <div>
-        <h1>Main Container: U r home</h1>
-        <Logout />
-        <Friends/>
-        {this.props.selectedFriend.id ?
-          <FriendGifts/> :
-        null }
+
+
+        <Navigation/>
+        <Grid>
+          <Row>
+            <Col xs={3} md={4}>
+              <Well>
+                <Row>
+                  <Friends/>
+                </Row>
+              </Well>
+            </Col>
+            <Col xs={9} md={8}>
+              {this.props.selectedOccasion.id ?
+                <OccasionShow selectedOccasion={this.props.selectedOccasion}/> :
+              null }
+              {this.props.selectedFriend.id ?
+                <FriendGifts/> :
+              null }
+            </Col>
+          </Row>
+
+        </Grid>
       </div>
     );
   }
@@ -31,7 +49,8 @@ class Container extends Component {
 const mapStateToProps = state => {
   return {
     current_user: state.users.current_user,
-    selectedFriend: state.friends.selectedFriend
+    selectedFriend: state.friends.selectedFriend,
+    selectedOccasion: state.occasions.selectedOccasion
   };
 };
 

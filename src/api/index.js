@@ -16,9 +16,7 @@ const get = (endpoint) => {
   return fetch(`${baseURL}/${endpoint}`).then(res => res.json());
 };
 
-export const loginUser = user_params => {
-  return post("login", user_params);
-};
+export const loginUser = user_params => post("login", user_params)
 
 export const fetchCurrentUser = () => {
   return post("fetch_current_user", { token: localStorage.getItem("token") });
@@ -28,4 +26,8 @@ export const fetchFriends = () => get("friends")
 
 export const fetchSelectedFriend = (friendId) => get(`friends/${friendId}/gifts`)
 
-export const saveGift = (gift) => post("gifts", {gift: gift})
+export const saveGift = (gift, friendId) => post(`friends/${friendId}/gifts`, {gift: gift})
+
+export const fetchOccasions = () => get("occasions")
+
+export const fetchSelectedOccasion = (id) => get(`occasions/${id}`)

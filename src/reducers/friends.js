@@ -1,4 +1,4 @@
-import { FETCH_FRIENDS, SET_SELECTED_FRIEND } from "../actions/types";
+import { FETCH_FRIENDS, SET_SELECTED_FRIEND, SET_SELECTED_OCCASION } from "../actions/types";
 
 const defaultState = { list: [], selectedFriend: {} };
 
@@ -16,9 +16,14 @@ export default function friends(state = defaultState, action) {
           id: action.payload.id,
           firstName: action.payload.first_name,
           lastName: action.payload.last_name,
-          birthday: action.payload.birtday
+          birthday: action.payload.birthday
         }
       };
+      case SET_SELECTED_OCCASION:
+        return {
+          ...state,
+          selectedFriend: {}
+        }
     default:
       return state;
   }

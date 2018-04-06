@@ -1,5 +1,5 @@
 import * as apiHelpers from "../api";
-import { SET_USER, START_SET_USER, LOGOUT_USER, FETCH_FRIENDS, SET_SELECTED_FRIEND, SAVE_GIFT } from "./types";
+import { SET_USER, START_SET_USER, LOGOUT_USER, FETCH_FRIENDS, SET_SELECTED_FRIEND, SAVE_GIFT, SET_SELECTED_OCCASION, FETCH_OCCASIONS } from "./types";
 
 export function loginUser(user_params) {
   return function(dispatch) {
@@ -66,14 +66,41 @@ export function setSelectedFriend(friendId){
   }
 }
 
-export function saveGift(gift){
+export function saveGift(gift, friendId){
   return function(dispatch){
     apiHelpers
-      .saveGift(gift)
+      .saveGift(gift, friendId)
       .then(data => {
         dispatch({
           type: SAVE_GIFT,
           payload: data
+        })
+      })
+  }
+}
+
+export function fetchOccasions(){
+  return function(dispatch){
+    apiHelpers
+      .fetchOccasions()
+      .then(data => {
+          dispatch({
+          type: FETCH_OCCASIONS,
+          payload: data
+        })
+    })
+  }
+}
+
+export function selectOccasion(id){
+  return function(dispatch){
+    apiHelpers
+      .fetchSelectedOccasion(id)
+      .then(data => {
+        dispatch({
+          type: SET_SELECTED_OCCASION,
+          payload: data
+
         })
       })
   }

@@ -2,37 +2,37 @@ import React from 'react'
 import { connect } from "react-redux"
 import GiftForm from "./GiftForm"
 import GiftShow from "./GiftShow"
+import GiftList from "./GiftList"
+import {Table} from "react-bootstrap"
+import {FormControl} from "react-bootstrap"
 
 
 class FriendGifts extends React.Component {
 
   state = {
-    sortedGifts: []
-  }
-
-  componentDidMount(){
-    this.setState({
-      sortedGifts: this.props.gifts
-    })
+    sortBySelector: "",
+    filterSelector: {
+      selector: "",
+      text: ""
+    }
   }
 
   sortGiftsBy = selector => {
     console.log(selector)
-    // const namedSelector = ""
-    // return (
-    //   if (selector === "occasion"){
-    //     namedSelector = "occasion.name"
-    //   } else {
-    //     namedSelector = selector
-    //   }
-    //   const gifts = this.props.gifts
-    //   .sort( (a,b) => b[namedSelector] < a[namedSelector] )
-    //   console.log(selector)
-    //   this.setState({
-    //     sortedGifts: gifts
-    //   }, console.log)
-    //   console.log(this.state)
-    // )
+    this.setState({
+      sortBySelector: selector
+    })
+  }
+
+  handleFilterChange = e => {
+    this.setState({
+      ...this.state,
+      filterSelector: {
+        ...this.state.filterSelector,
+        selector: e.target.name,
+        text: e.target.value
+      }
+    }, console.log)
   }
 
 
@@ -40,22 +40,22 @@ class FriendGifts extends React.Component {
     console.log(this.state)
     return (
       <div>
-        Friend Gifts
-        <table>
+        <h2>{this.props.selectedFriend.firstName} {this.props.selectedFriend.lastName}</h2>
+        <h3> Birthday: {this.props.selectedFriend.birthday}</h3>
+        <Table responsive>
           <thead>
             <tr>
-              <th onClick={() => this.sortGiftsBy("description")} >Gift Description</th>
-              <th onClick={() => this.sortGiftsBy("bought")}>Bought?</th>
-              <th onClick={() => this.sortGiftsBy("occasion")}>Occasion</th>
-              <th onClick={() => this.sortGiftsBy("year")}>Year</th>
+              <th><a href="#" onClick={() => this.sortGiftsBy("description")} >Gift</a></th>
+              <th><a href="#" onClick={() => this.sortGiftsBy("bought")} >Bought? </a></th>
+              <th><a href="#" onClick={() => this.sortGiftsBy("occasion")} >Occasion</a></th>
+              <th><a href="#" onClick={() => this.sortGiftsBy("year")} >Year</a></th>
             </tr>
           </thead>
           <tbody>
             <GiftForm/>
-            {this.props.gifts.map( gift => <GiftShow key={gift.id} gift={gift}/>)}
-
+            <GiftList gifts={this.props.gifts} sortBySelector={this.state.sortBySelector} filterSelector={this.state.filterSelector}/>
           </tbody>
-        </table>
+          </Table >
       </div>
     )
   }
@@ -65,8 +65,17 @@ const mapStateToProps = state => {
   const gifts = state.gifts.list
   .sort( (a,b) => b.description < a.description )
   return {
-    gifts: gifts
+    gifts: gifts,
+    selectedFriend: state.friends.selectedFriend
   }
 }
 
 export default connect(mapStateToProps)(FriendGifts)
+
+//
+// <tr>
+//   <td>
+//     <FormControl type="text" placeholder="filter descriptions" name="description" onChange={this.handleFilterChange}/>
+//   </td>
+//
+// </tr>

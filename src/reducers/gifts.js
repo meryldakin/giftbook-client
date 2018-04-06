@@ -1,4 +1,4 @@
-import { SET_SELECTED_FRIEND, SAVE_GIFT } from "../actions/types";
+import { SET_SELECTED_FRIEND, SAVE_GIFT, SET_SELECTED_OCCASION } from "../actions/types";
 
 const defaultState = { list: [] };
 
@@ -6,6 +6,12 @@ export default function friends(state = defaultState, action) {
   switch (action.type) {
 
     case SET_SELECTED_FRIEND:
+      return {
+        ...state,
+        list: action.payload.gifts
+      };
+    case SET_SELECTED_OCCASION:
+    console.log(action.payload)
       return {
         ...state,
         list: action.payload.gifts

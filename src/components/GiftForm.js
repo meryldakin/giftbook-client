@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { saveGift } from "../actions"
+import { FormControl, Checkbox, FormGroup , Button} from "react-bootstrap"
 
 class GiftForm extends React.Component {
 
@@ -9,7 +10,7 @@ class GiftForm extends React.Component {
     occasion: "",
     bought: "",
     year: "2018",
-    id: ""
+    gift_id: ""
 
   }
 
@@ -21,7 +22,7 @@ class GiftForm extends React.Component {
         occasion: occasion,
         bought: this.props.gift.bought || false,
         year: this.props.gift.year || "",
-        id: this.props.gift.id
+        gift_id: this.props.gift.id
       })
     }
   }
@@ -41,44 +42,49 @@ class GiftForm extends React.Component {
 
   handleSave = (event) => {
     event.preventDefault()
-    this.props.saveGift(this.state)
+    this.props.saveGift(this.state, this.props.selectedFriend.id)
     this.props.toggleEdit ?
     this.props.toggleEdit() :
     this.setState({
       description: "",
       occasion: "",
       bought: "",
-      year: "",
-      id: ""
+      year: "2018",
+      gift_id: ""
     })
 
   }
 
   render(){
-    console.log(this.state)
+    console.log(this.props)
     return(
       <tr>
         <td>
-          <input type="text" name="description" placeholder="Gift Description" value={this.state.description} onChange={this.handleChange}/>
+          <FormControl type="text" name="description" placeholder="Gift Description" value={this.state.description} onChange={this.handleChange}/>
         </td>
         <td>
-          <input type="checkbox" checked={this.state.bought} name="bought" onChange={this.handleChange}/>
+          <Checkbox type="checkbox" checked={this.state.bought} name="bought" onChange={this.handleChange}/>
         </td>
         <td>
-          <select value={this.state.occasion} name="occasion" onChange={this.handleChange}>
-            <option>Birthday</option>
-            <option>Christmas</option>
-            <option>Mother's Day</option>
-            <option>Father's Day</option>
-            <option>Valentine's Day</option>
-            <option>Anniversary</option>
-          </select>
+          <FormGroup controlId="formControlsSelect">
+
+            <FormControl componentClass="select" placeholder="select" value={this.state.occasion} name="occasion" onChange={this.handleChange}>
+              <option>Select occasion</option>
+              <option>Birthday</option>
+              <option>Christmas</option>
+              <option>Mother's Day</option>
+              <option>Father's Day</option>
+              <option>Valentine's Day</option>
+              <option>Anniversary</option>
+            </FormControl>
+          </FormGroup>
+
         </td>
         <td>
-          <input type="number" name="year" placeholder="Year" min="1960" max="2100" value={this.state.year} onChange={this.handleChange}/>
+          <FormControl type="number" name="year" placeholder="Year" min="1960" max="2100" value={this.state.year} onChange={this.handleChange}/>
         </td>
         <td>
-          <button onClick={this.handleSave}>Save</button>
+          <Button onClick={this.handleSave}><i className="fas fa-save"></i></Button>
         </td>
 
       </tr>
@@ -86,4 +92,10 @@ class GiftForm extends React.Component {
   }
 }
 
-export default connect(null, {saveGift})(GiftForm)
+const mapStateToProps = state => {
+  return {
+    selectedFriend: state.friends.selectedFriend
+  }
+}
+
+export default connect(mapStateToProps, {saveGift})(GiftForm)
