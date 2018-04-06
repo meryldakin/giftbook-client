@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+
 
 const withAuth = WrappedComponent => {
   return class extends React.Component {
@@ -9,9 +9,7 @@ const withAuth = WrappedComponent => {
         "sending to container?",
         this.props.loggedIn
       );
-      return this.props.loggedIn
-        ? <WrappedComponent {...this.props} />
-        : <Redirect to="/login" />;
+      return <WrappedComponent {...this.props} />
     }
   };
 };

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-// Add Router
-import { withRouter, Route } from "react-router";
 // Add REDUX
 import { connect } from "react-redux";
 //import auth hoc
@@ -28,12 +26,8 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Route
-          exact
-          path="/"
-          render={() => <AuthedContainer loggedIn={this.props.loggedIn} />}
-        />
-        <Route exact path="/login" component={Login} />
+        <Container/>
+        <Login />
       </div>
     );
   }
@@ -48,4 +42,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, actions)(App));
+export default connect(mapStateToProps, actions)(App);

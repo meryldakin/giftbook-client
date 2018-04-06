@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/index";
-import { withRouter } from "react-router";
-import { Redirect } from "react-router-dom";
 import Container from "./Container";
 
 class Login extends React.Component {
@@ -26,13 +24,13 @@ class Login extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.loginUser(this.state, this.props.history);
+    this.props.loginUser(this.state);
   };
 
   render() {
     if (!!localStorage.getItem("token") && !!this.props.loggedIn) {
       console.log("login", this.props);
-      return <Redirect to="/" />;
+      return <div>"Redirect fix"</div>;
     }
     return (
       <div>
@@ -55,4 +53,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { loginUser })(Login));
+export default connect(mapStateToProps, { loginUser })(Login);

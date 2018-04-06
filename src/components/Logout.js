@@ -4,7 +4,7 @@ import { logoutUser } from "../actions";
 
 const Logout = props => {
   const handleLogout = () => {
-    props.logoutUser(props.history);
+    props.logoutUser();
   };
   return <button onClick={handleLogout}> Logout </button>;
 };

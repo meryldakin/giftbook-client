@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import Logout from "./Logout";
 
 class Container extends Component {
@@ -8,7 +7,7 @@ class Container extends Component {
     return (
       <div>
         <h1>Main Container: U r home</h1>
-        <Logout history={this.props.history} />
+        <Logout />
       </div>
     );
   }
@@ -20,4 +19,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Container));
+export default connect(mapStateToProps)(Container);

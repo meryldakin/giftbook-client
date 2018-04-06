@@ -10,9 +10,6 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import reducer from "./reducers/root.js";
 
-//ROUTER
-import { BrowserRouter as Router } from "react-router-dom";
-
 // Thunk Setup
 const middleware = [thunk];
 
@@ -25,9 +22,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <App />
   </Provider>,
   document.getElementById('root'));
 registerServiceWorker();
