@@ -30,4 +30,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Container);
+export default connect(mapStateToProps, {fetchFriends})(Container);

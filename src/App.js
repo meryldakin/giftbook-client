@@ -23,13 +23,15 @@ class App extends Component {
   render() {
     if (this.props.loading) {
       return <Loading />;
+    } else if (this.props.loggedIn) {
+        return (
+          <div className="App">
+            <Container/>
+          </div>
+        )
+    } else {
+      return <Login />
     }
-    return (
-      <div className="App">
-        <Container/>
-        <Login />
-      </div>
-    );
   }
 }
 

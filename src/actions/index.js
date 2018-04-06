@@ -1,5 +1,5 @@
 import * as apiHelpers from "../api";
-import { SET_USER, START_SET_USER, LOGOUT_USER, FETCH_FRIENDS } from "./types";
+import { SET_USER, START_SET_USER, LOGOUT_USER, FETCH_FRIENDS, SET_SELECTED_FRIEND } from "./types";
 
 export function loginUser(user_params) {
   return function(dispatch) {
@@ -41,7 +41,8 @@ export function fetchFriends(){
             return {
               firstName: friend.first_name,
               lastName: friend.last_name,
-              birthday: friend.birthday
+              birthday: friend.birthday,
+              id: friend.id
             }
           })
           dispatch({
@@ -49,5 +50,18 @@ export function fetchFriends(){
           payload: friends
         })
     })
+  }
+}
+
+export function setSelectedFriend(friendId){
+  return function(dispatch){
+    apiHelpers
+      .fetchSelectedFriend(friendId)
+      .then(data => {
+        dispatch({
+          type: SET_SELECTED_FRIEND,
+          payload: data
+        })
+      })
   }
 }

@@ -25,3 +25,5 @@ export const fetchCurrentUser = () => {
 };
 
 export const fetchFriends = () => get("friends")
+
+export const fetchSelectedFriend = (friendId) => get(`friends/${friendId}/gifts`)
